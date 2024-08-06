@@ -1,11 +1,10 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:limerick_flutter_task/presentation/common_widgets/custom_product_shimmer_loading.dart';
 import 'package:limerick_flutter_task/presentation/product_list/bloc/product_list_bloc.dart';
 import 'package:limerick_flutter_task/presentation/product_list/widget/bottom_sheet.dart';
 import 'package:limerick_flutter_task/presentation/product_list/widget/custom_card.dart';
+import 'package:limerick_flutter_task/presentation/product_list/widget/custom_checkout_alert.dart';
 import 'package:limerick_flutter_task/presentation/product_list/widget/search_bar.dart';
 
 class ProductListScreen extends StatefulWidget {
@@ -36,7 +35,6 @@ class _ProductListScreenState extends State<ProductListScreen> {
         child: BlocBuilder<ProductListBloc, ProductListState>(
           bloc: productListState,
           builder: (context, state) {
-            log("----------------- ${state}");
             if (state is GetProductListLoadingState) {
               return ListView.builder(
                 itemCount: 10,
@@ -55,8 +53,22 @@ class _ProductListScreenState extends State<ProductListScreen> {
         ),
       ),
       bottomSheet: BottomSheetWidget(
-        button: () {},
+        button: () {
+          showAlertDialog(context);
+        },
       ),
+    );
+  }
+
+  showAlertDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return CustomCheckoutAlert(
+          conFirmButton: () {},
+        );
+      },
     );
   }
 }

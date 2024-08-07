@@ -15,15 +15,15 @@ class PasswordTextField extends StatelessWidget {
     return BlocBuilder<LoginBloc, LoginState>(
       bloc: loginBloc,
       builder: (context, state) {
-        var isObscure = false;
-        log("---------- 0000 -------------- ");
+        bool obscureEnable = false;
+        log("------- 11-------- ${obscureEnable}");
         if (state is LoginObscureState) {
-          isObscure = state.enableObscure;
-          log("---111--- ${state.enableObscure} ------------------");
+          obscureEnable = !state.enableObscure;
         }
-        log("---------- 2222 -------------- ");
+        log("------22--------- ${obscureEnable}");
         return TextFormField(
           controller: passwordController,
+          obscureText: obscureEnable,
           decoration: InputDecoration(
             focusedErrorBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(5),
@@ -43,7 +43,17 @@ class PasswordTextField extends StatelessWidget {
             ),
             labelText: "Password",
             labelStyle: const TextStyle(color: Colors.black54),
-            suffixIcon: const Icon(Icons.remove_red_eye_outlined),
+            suffixIcon: obscureEnable
+                ? IconButton(
+                    onPressed: () {
+                      loginBloc.add(LoginObscureTapEvent(enableObscure: obscureEnable));
+                    },
+                    icon: const Icon(Icons.visibility_off))
+                : IconButton(
+                    onPressed: () {
+                      loginBloc.add(LoginObscureTapEvent(enableObscure: obscureEnable));
+                    },
+                    icon: const Icon(Icons.visibility)),
           ),
           validator: (value) {
             if (value == null || value == "") {

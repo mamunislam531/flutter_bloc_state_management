@@ -4,6 +4,11 @@ abstract class LoginState {}
 
 final class LoginInitial extends LoginState {}
 
+final class LoginRememberMeState extends LoginState {
+  final bool rememberMe;
+  LoginRememberMeState({required this.rememberMe});
+}
+
 final class LoginLoadingState extends LoginState {}
 
 final class LoginObscureState extends LoginState {

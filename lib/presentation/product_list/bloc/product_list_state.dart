@@ -2,10 +2,7 @@ part of 'product_list_bloc.dart';
 
 abstract class ProductListState {}
 
-final class ProductListInitial extends ProductListState {
-
-}
-
+final class ProductListInitial extends ProductListState {}
 
 final class GetProductListLoadingState extends ProductListState {}
 

@@ -17,7 +17,7 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
   // Fetch Product List from API
   FutureOr<void> productListEvent(ProductListEvent event, Emitter<ProductListState> emit) async {
     emit(GetProductListLoadingState());
-    // productList = await ProductListRepo.getProductList();
+    productList = await ProductListRepo.getProductList();
     await Future.delayed(const Duration(seconds: 5));
     emit(GetProductListState(products: productList));
   }

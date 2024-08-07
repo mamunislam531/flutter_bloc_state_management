@@ -11,6 +11,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   LoginBloc() : super(LoginInitial()) {
     on<LoginActionEvent>(loginActionEvent);
     on<LoginObscureTapEvent>(loginObscureTapEvent);
+    on<LoginRememberEvent>(loginRememberEvent);
   }
 
   FutureOr<void> loginActionEvent(LoginActionEvent event, Emitter<LoginState> emit) async {
@@ -27,6 +28,10 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   FutureOr<void> loginObscureTapEvent(LoginObscureTapEvent event, Emitter<LoginState> emit) {
     log("--------------- ${event.enableObscure}");
     log("--------------- ${!event.enableObscure}");
-    emit(LoginObscureState(enableObscure: !event.enableObscure));
+    emit(LoginObscureState(enableObscure: event.enableObscure));
+  }
+
+  FutureOr<void> loginRememberEvent(LoginRememberEvent event, Emitter<LoginState> emit) {
+    emit(LoginRememberMeState(rememberMe: !event.rememberMe));
   }
 }

@@ -9,6 +9,11 @@ class LoginObscureTapEvent extends LoginEvent {
   LoginObscureTapEvent({required this.enableObscure});
 }
 
+class LoginRememberEvent extends LoginEvent {
+  bool rememberMe;
+  LoginRememberEvent({required this.rememberMe});
+}
+
 class LoginActionEvent extends LoginEvent {
   String email;
   String password;

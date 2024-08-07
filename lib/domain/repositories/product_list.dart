@@ -10,6 +10,7 @@ class ProductListRepo {
       Uri url = Uri.parse(ApiUrls.productListsUrl);
       var response = await http.get(url);
 
+      log("-------- ${response.body}");
       if (response.statusCode == 200) {
         ProductListModels data = ProductListModels.fromJson(jsonDecode(response.body));
         return data.products ?? [];
